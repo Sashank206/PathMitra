@@ -10,6 +10,7 @@ return [
         'https://path-mitra.vercel.app',
     ],
 
+
     'allowed_origins_patterns' => [],
 
     'allowed_headers' => ['*'],
