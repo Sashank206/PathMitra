@@ -1,3 +1,4 @@
+
 <?php
 
 return [
@@ -6,12 +7,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => [
-        'https://path-mitra.vercel.app',
-        'http://localhost:5173',
-    ],
-
-
+    'allowed_origins' => ['*'],
 
     'allowed_origins_patterns' => [],
 
