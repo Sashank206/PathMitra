@@ -5,8 +5,8 @@ RUN apt-get update && apt-get install -y \
 
 RUN docker-php-ext-install zip
 
-# Install MongoDB extension
-RUN pecl install mongodb \
+# Install compatible MongoDB extension version
+RUN pecl install mongodb-1.21.0 \
     && docker-php-ext-enable mongodb
 
 # Install Composer
@@ -17,6 +17,8 @@ WORKDIR /app
 COPY . .
 
 RUN composer install --no-dev --optimize-autoloader
+
+RUN chmod -R 775 storage bootstrap/cache
 
 EXPOSE 10000
 
