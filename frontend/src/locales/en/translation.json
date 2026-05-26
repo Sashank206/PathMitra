@@ -1,0 +1,158 @@
+{
+  "navbar": {
+    "home": "Home",
+    "careerGuide": "Career Guide",
+    "jobs": "Jobs",
+    "dashboard": "Dashboard",
+    "login": "Log in",
+    "register": "Register",
+    "logout": "Logout",
+    "greeting": "Hi, {{name}}"
+  },
+  "home": {
+    "hero": {
+      "badge": "Smart Employment Navigation System",
+      "title1": "Stop Searching.",
+      "title2": "Start Finding.",
+      "desc": "Inspired by PGRKAM, Path Mitra solves the problem of scattered employment services by guiding every user — step by step — to exactly the right module.",
+      "quote": "\"Users struggle to navigate across multiple modules. Path Mitra's hand-holding mechanism removes that friction.\"",
+      "btnGuide": "Start Career Guide",
+      "btnJobs": "Browse All Jobs"
+    },
+    "challengeTitle": "The Challenge (PGRKAM)",
+    "challenge1": "Users get lost across too many unguided modules",
+    "challenge2": "No hand-holding mechanism to direct queries",
+    "challenge3": "Critical services buried in complex navigation",
+    "solutionTitle": "The Path Mitra Solution",
+    "solution1": "Step-by-step Career Guide narrows down the right module",
+    "solution2": "Smart recommendations based on qualification & interest",
+    "solution3": "All 12+ services accessible from a single unified platform",
+    "howItWorks": {
+      "badge": "The Hand-Holding Mechanism",
+      "title": "3 Steps to the Right Career Path",
+      "desc": "No more wandering across modules. Our guided flow takes your profile and instantly points you to the exact service you need.",
+      "step1Title": "Tell Us About Yourself",
+      "step1Desc": "Answer a few quick questions about your qualification, experience & goals.",
+      "step2Title": "Get Smart Recommendations",
+      "step2Desc": "Our system maps your profile to the most relevant employment module.",
+      "step3Title": "Navigate with Confidence",
+      "step3Desc": "Land directly on the right service without any guesswork or manual searching.",
+      "btnTry": "Try the Career Guide Now"
+    },
+    "grid": {
+      "badge": "All Modules — One Platform",
+      "title": "Every Employment Service, Unified",
+      "desc": "Every service that exists on government portals — now accessible from a single, intuitive, guided interface."
+    },
+    "services": {
+      "govtTitle": "Government Jobs",
+      "govtDesc": "Latest vacancies from PSUs, Railways, Banks & ministries.",
+      "privateTitle": "Private Sector",
+      "privateDesc": "Opportunities in top-tier companies across IT, retail, and tech.",
+      "selfEmploymentTitle": "Self Employment",
+      "selfEmploymentDesc": "Govt-backed startup schemes, MSME funding & registrations.",
+      "foreignPlacementsTitle": "Foreign Placements",
+      "foreignPlacementsDesc": "Verified international placements with visa & relocation guidance.",
+      "foreignStudyTitle": "Foreign Study",
+      "foreignStudyDesc": "State-sponsored overseas scholarships and international study pathways.",
+      "armedForcesTitle": "Induction into Armed Forces",
+      "armedForcesDesc": "Recruitment rallies, physical tests, and entry exams for Agniveer & forces.",
+      "skillDevelopmentTitle": "Skill Development",
+      "skillDevelopmentDesc": "Certified upskilling courses aligned with industry demand.",
+      "counselingTitle": "Counseling & Guidance",
+      "counselingDesc": "One-on-one sessions with certified employment counselors.",
+      "jobMelasTitle": "Job Melas",
+      "jobMelasDesc": "Direct recruitment drives, walk-in interviews & campus fairs.",
+      "resumeBuilderTitle": "Resume Builder",
+      "resumeBuilderDesc": "AI-powered ATS-optimized resume generation in minutes.",
+      "interviewPrepTitle": "Interview Prep",
+      "interviewPrepDesc": "Mock interview sessions and role-specific question banks.",
+      "careerAssessmentsTitle": "Career Assessments",
+      "careerAssessmentsDesc": "Psychometric & aptitude tests to discover your ideal career.",
+      "apprenticeshipsTitle": "Apprenticeships",
+      "apprenticeshipsDesc": "Earn-while-you-learn schemes under NAPS & state programs.",
+      "freelanceTitle": "Freelance & Gigs",
+      "freelanceDesc": "Short-term project work for independent skilled professionals."
+    },
+    "stats": {
+      "modules": "Employment Modules",
+      "jobs": "Active Job Listings",
+      "seekers": "Registered Job Seekers",
+      "rate": "Navigation Success Rate"
+    },
+    "cta": {
+      "badge": "Don't Know Where to Start?",
+      "title1": "Let Path Mitra",
+      "title2": "Guide You — Step by Step",
+      "desc": "Our intelligent Career Guide asks you 5 simple questions and pinpoints the exact employment module that fits your profile. No confusion. No wrong turns.",
+      "btnGuide": "Start Your Career Guide",
+      "btnAccount": "Create Free Account"
+    }
+  },
+  "login": {
+    "title": "Welcome Back",
+    "subtitle": "Enter your credentials to access Path Mitra",
+    "emailLabel": "Email Address",
+    "passwordLabel": "Password",
+    "forgotPassword": "Forgot password?",
+    "signInBtn": "Sign In",
+    "signingIn": "Signing In...",
+    "noAccount": "Don't have an account?",
+    "createAccount": "Create an account"
+  },
+  "register": {
+    "title": "Create an Account",
+    "subtitle": "Join Path Mitra to start your journey",
+    "nameLabel": "Full Name",
+    "emailLabel": "Email Address",
+    "passwordLabel": "Password",
+    "confirmPassword": "Confirm Password",
+    "signUpBtn": "Sign Up",
+    "signingUp": "Creating Account...",
+    "alreadyHaveAccount": "Already have an account?",
+    "signInLink": "Sign In",
+    "checkEmail": "Check your email",
+    "verificationSent": "We've sent a verification link to {{email}}. Please verify your email address to continue.",
+    "goToLogin": "Go to Login"
+  },
+  "footer": {
+    "desc": "Your Smart Employment Companion. Discover government schemes, private career opportunities, upskilling courses, and one-on-one expert counseling.",
+    "servicesTitle": "Services",
+    "govtJobs": "Government Jobs",
+    "privateJobs": "Private Jobs",
+    "selfEmployment": "Self Employment",
+    "counseling": "Career Counselling",
+    "linksTitle": "Quick Links",
+    "homeLink": "Home Page",
+    "guideLink": "Career Guide",
+    "jobsLink": "Job Search",
+    "dashboardLink": "Dashboard",
+    "connectTitle": "Connect With Us",
+    "connectDesc": "Empowering employment and skill-building across India.",
+    "copyright": "© {{year}} Path Mitra. Designed with modern patriotic colors & accessibility.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use"
+  },
+  "dashboard": {
+    "tabs": {
+      "overview": "Overview",
+      "applications": "Applications",
+      "saved": "Saved Jobs",
+      "resume": "Resume Builder",
+      "settings": "Settings",
+      "systemOverview": "System Overview",
+      "manageJobs": "Manage Jobs",
+      "manageUsers": "Manage Users"
+    },
+    "overview": {
+      "appliedJobs": "Applied Jobs",
+      "savedJobs": "Saved Jobs",
+      "profileViews": "Profile Views",
+      "interviews": "Interviews",
+      "totalUsers": "Total Users",
+      "activeJobs": "Active Jobs",
+      "newApplications": "New Applications",
+      "systemAlerts": "System Alerts"
+    }
+  }
+}

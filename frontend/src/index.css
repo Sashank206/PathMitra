@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Outfit', 'Plus Jakarta Sans', system-ui, sans-serif;
+  
+  --color-saffron: #f97316;
+  --color-saffron-hover: #ea580c;
+  --color-saffron-light: #ffedd5;
+  --color-saffron-dark: #c2410c;
+  
+  --color-green-india: #15803d;
+  --color-green-india-hover: #166534;
+  --color-green-india-light: #dcfce7;
+  --color-green-india-dark: #14532d;
+  
+  --color-navy-chakra: #0a122c;
+  --color-navy-chakra-hover: #050a18;
+  --color-navy-chakra-light: #f1f5f9;
+  
+  --color-chakra: #2563eb;
+  
+  --color-primary: var(--color-saffron);
+  --color-primary-hover: var(--color-saffron-hover);
+  --color-secondary: var(--color-green-india);
+  --color-dark: var(--color-navy-chakra);
+  --color-light: #fbfbfb;
+}
+
+@layer base {
+  body {
+    @apply bg-slate-50 text-slate-900 antialiased selection:bg-saffron/30 selection:text-saffron-dark;
+    font-family: var(--font-sans);
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-sans);
+    letter-spacing: -0.02em;
+  }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(2deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.2; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.08); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 8s ease-in-out infinite;
+}
