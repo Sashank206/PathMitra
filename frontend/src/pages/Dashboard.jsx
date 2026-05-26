@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { User, FileText, Bookmark, Bell, Settings, LogOut, Briefcase, Users, LayoutDashboard, Database, Activity, Trash2, X, Plus, Edit } from 'lucide-react';
+import { User, FileText, Bookmark, Bell, Settings, LogOut, Briefcase, Users, LayoutDashboard, Database, Activity, Trash2, X, Plus, Edit, Check, MapPin, IndianRupee, Building2 } from 'lucide-react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import api from '../utils/api';

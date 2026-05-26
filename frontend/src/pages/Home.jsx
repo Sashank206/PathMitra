@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Search, Compass, GraduationCap, Building2, Globe, Users, TrendingUp, Briefcase, Calendar, FileText, Video, BrainCircuit, Wrench, Laptop, CheckCircle, AlertCircle, Lightbulb, Shield, BookOpen } from 'lucide-react';
+import { ArrowRight, Search, Compass, GraduationCap, Building2, Globe, Users, TrendingUp, Briefcase, Calendar, FileText, Video, BrainCircuit, Wrench, Laptop, CheckCircle, Shield, BookOpen } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 
@@ -13,18 +13,6 @@ const Home = () => {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.4 } }
   };
-
-  const painPoints = [
-    { icon: <AlertCircle className="text-saffron" size={20} />, text: t('home.challenge1') },
-    { icon: <AlertCircle className="text-saffron" size={20} />, text: t('home.challenge2') },
-    { icon: <AlertCircle className="text-saffron" size={20} />, text: t('home.challenge3') },
-  ];
-
-  const solutions = [
-    { icon: <CheckCircle className="text-green-india" size={20} />, text: t('home.solution1') },
-    { icon: <CheckCircle className="text-green-india" size={20} />, text: t('home.solution2') },
-    { icon: <CheckCircle className="text-green-india" size={20} />, text: t('home.solution3') },
-  ];
 
   const services = [
     { title: t('home.services.govtTitle'), icon: <Building2 size={22} />, desc: t('home.services.govtDesc'), color: 'saffron', path: '/jobs?category=govt' },
@@ -89,68 +77,32 @@ const Home = () => {
         <div className="absolute top-0 right-0 w-[550px] h-[550px] bg-saffron rounded-full blur-[130px] opacity-10 -translate-y-1/2 translate-x-1/3 animate-pulse-slow"></div>
         <div className="absolute bottom-0 left-0 w-[450px] h-[450px] bg-green-india rounded-full blur-[110px] opacity-15 translate-y-1/3 -translate-x-1/4 animate-pulse-slow"></div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <motion.div initial={{ opacity: 0, y: 25 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-saffron/10 border border-saffron/20 text-saffron text-sm font-semibold mb-8">
-                <Compass size={15} /> {t('home.hero.badge')}
-              </div>
-              <h1 className="text-5xl md:text-6xl font-extrabold text-white tracking-tight leading-tight mb-6">
-                {t('home.hero.title1')}<br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-saffron via-white to-green-india">
-                  {t('home.hero.title2')}
-                </span>
-              </h1>
-              <p className="text-lg text-slate-300 mb-4 leading-relaxed">
-                {t('home.hero.desc')}
-              </p>
-              <div className="text-sm text-slate-300 mb-10 leading-relaxed border-l-2 border-saffron pl-4 bg-white/5 py-2.5 pr-4 rounded-r-lg">
-                {t('home.hero.quote')}
-              </div>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link to="/guide" className="px-8 py-4 bg-gradient-to-r from-saffron to-saffron-hover hover:shadow-lg hover:shadow-saffron/30 text-white rounded-xl font-bold transition-all flex items-center justify-center gap-2 hover:-translate-y-0.5">
-                  <Compass size={20} /> {t('home.hero.btnGuide')}
-                </Link>
-                <Link to="/jobs" className="px-8 py-4 bg-white/10 hover:bg-white/20 border border-white/20 text-white rounded-xl font-semibold transition-all flex items-center justify-center gap-2 hover:-translate-y-0.5 backdrop-blur-sm">
-                  <Search size={20} /> {t('home.hero.btnJobs')}
-                </Link>
-              </div>
-            </motion.div>
-
-            {/* Problem vs Solution card */}
-            <motion.div initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.15 }}>
-              <div className="bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-md shadow-2xl relative">
-                <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-saffron to-transparent opacity-10 rounded-full blur-xl animate-pulse"></div>
-                <div className="mb-8">
-                  <p className="text-xs font-extrabold text-saffron uppercase tracking-widest mb-4 flex items-center gap-2">
-                    <AlertCircle size={16} /> {t('home.challengeTitle')}
-                  </p>
-                  <div className="space-y-3.5">
-                    {painPoints.map((p, i) => (
-                      <div key={i} className="flex items-start gap-3.5 text-slate-300 text-sm leading-relaxed">
-                        <div className="mt-0.5">{p.icon}</div>
-                        <span>{p.text}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                
-                <div className="border-t border-white/10 pt-6">
-                  <p className="text-xs font-extrabold text-green-india uppercase tracking-widest mb-4 flex items-center gap-2">
-                    <Lightbulb className="text-green-india" size={16} /> {t('home.solutionTitle')}
-                  </p>
-                  <div className="space-y-3.5">
-                    {solutions.map((s, i) => (
-                      <div key={i} className="flex items-start gap-3.5 text-slate-300 text-sm leading-relaxed">
-                        <div className="mt-0.5">{s.icon}</div>
-                        <span>{s.text}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+          <motion.div initial={{ opacity: 0, y: 25 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="flex flex-col items-center">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-saffron/10 border border-saffron/20 text-saffron text-sm font-semibold mb-8">
+              <Compass size={15} /> {t('home.hero.badge')}
+            </div>
+            <h1 className="text-5xl md:text-6xl font-extrabold text-white tracking-tight leading-tight mb-6">
+              {t('home.hero.title1')}<br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-saffron via-white to-green-india">
+                {t('home.hero.title2')}
+              </span>
+            </h1>
+            <p className="text-lg text-slate-300 mb-6 leading-relaxed max-w-2xl">
+              {t('home.hero.desc')}
+            </p>
+            <div className="text-sm text-slate-300 mb-10 leading-relaxed border-l-2 border-saffron pl-4 bg-white/5 py-2.5 pr-4 rounded-r-lg max-w-xl text-left">
+              {t('home.hero.quote')}
+            </div>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link to="/guide" className="px-8 py-4 bg-gradient-to-r from-saffron to-saffron-hover hover:shadow-lg hover:shadow-saffron/30 text-white rounded-xl font-bold transition-all flex items-center justify-center gap-2 hover:-translate-y-0.5">
+                <Compass size={20} /> {t('home.hero.btnGuide')}
+              </Link>
+              <Link to="/jobs" className="px-8 py-4 bg-white/10 hover:bg-white/20 border border-white/20 text-white rounded-xl font-semibold transition-all flex items-center justify-center gap-2 hover:-translate-y-0.5 backdrop-blur-sm">
+                <Search size={20} /> {t('home.hero.btnJobs')}
+              </Link>
+            </div>
+          </motion.div>
         </div>
       </section>
 
