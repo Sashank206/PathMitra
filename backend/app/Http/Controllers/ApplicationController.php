@@ -32,6 +32,13 @@ class ApplicationController extends Controller
             'job_id' => $jobId,
             'status' => 'applied',
         ]);
+
+        // Generate an admin alert for the application
+        \App\Models\Notification::create([
+            'type' => 'new_application',
+            'message' => 'New application for "' . $job->title . '" submitted by ' . $user->name,
+            'is_read' => false,
+        ]);
         
         return response()->json([
             'message' => 'Application submitted successfully!',

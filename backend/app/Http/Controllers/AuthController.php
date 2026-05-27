@@ -27,6 +27,13 @@ class AuthController extends Controller
             'role' => 'user', // Default role
         ]);
 
+        // Generate an admin alert for the registration
+        \App\Models\Notification::create([
+            'type' => 'user_registered',
+            'message' => 'New user registered: ' . $user->name . ' (' . $user->email . ')',
+            'is_read' => false,
+        ]);
+
         event(new Registered($user));
 
         return response()->json([

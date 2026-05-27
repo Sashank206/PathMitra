@@ -30,6 +30,10 @@ class JobController extends Controller
 
     public function store(Request $request)
     {
+        if ($request->user()->role !== 'admin') {
+            return response()->json(['message' => 'Unauthorized. Only administrators can perform this action.'], 403);
+        }
+
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
@@ -53,6 +57,10 @@ class JobController extends Controller
 
     public function update(Request $request, $id)
     {
+        if ($request->user()->role !== 'admin') {
+            return response()->json(['message' => 'Unauthorized. Only administrators can perform this action.'], 403);
+        }
+
         $job = Job::findOrFail($id);
         
         $validated = $request->validate([
@@ -70,8 +78,12 @@ class JobController extends Controller
         return response()->json($job);
     }
 
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
+        if ($request->user()->role !== 'admin') {
+            return response()->json(['message' => 'Unauthorized. Only administrators can perform this action.'], 403);
+        }
+
         $job = Job::findOrFail($id);
         $job->delete();
         return response()->json(null, 204);
