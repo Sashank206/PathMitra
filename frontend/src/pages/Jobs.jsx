@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { useSearchParams, useNavigate } from 'react-router-dom';
+import { useSearchParams, useNavigate, Link } from 'react-router-dom';
 import { Search, MapPin, Briefcase, IndianRupee, Clock, Building2, X, Bookmark, Check } from 'lucide-react';
 import api from '../utils/api';
 
@@ -20,6 +20,9 @@ const Jobs = () => {
   const [savedJobIds, setSavedJobIds] = useState(new Set());
   const [appliedJobIds, setAppliedJobIds] = useState(new Set());
   const [selectedJob, setSelectedJob] = useState(null);
+  const [user, setUser] = useState(null);
+
+  const isAdmin = user?.role === 'admin';
 
   const getJobDetails = (job) => {
     if (!job) return null;
@@ -289,6 +292,11 @@ const Jobs = () => {
     setSearchInput(searchParam);
     setSelectedCategory(categoryParam);
     fetchUserData();
+
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
   }, [searchParam, categoryParam, fetchJobs, fetchUserData]);
 
   const handleSearch = () => {
@@ -550,38 +558,47 @@ const Jobs = () => {
                       )}
                     </div>
 
-                    <div className="flex items-center gap-3">
-                      <button 
-                        onClick={() => handleSaveToggle(jobId)}
-                        className={`flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl border text-xs font-bold transition-all hover:-translate-y-0.5 ${
-                          isSaved 
-                            ? 'bg-green-india/10 text-green-india border-green-india/30 hover:bg-green-india/20' 
-                            : 'bg-slate-50 text-slate-600 border-slate-200 hover:text-saffron hover:border-saffron/30 hover:bg-saffron/5'
-                        }`}
-                        title={isSaved ? "Saved to bookmarks" : "Save to bookmarks"}
+                    {isAdmin ? (
+                      <Link 
+                        to="/dashboard?tab=manage_jobs" 
+                        className="w-full text-center py-2.5 rounded-xl font-bold bg-slate-100 hover:bg-slate-200 hover:text-navy-chakra text-navy-chakra/80 border border-slate-200 transition-all text-xs block"
                       >
-                        <Bookmark size={13} className={isSaved ? "fill-green-india text-green-india" : ""} />
-                        {isSaved ? "Saved" : "Save"}
-                      </button>
+                        Manage Posting (Admin)
+                      </Link>
+                    ) : (
+                      <div className="flex items-center gap-3">
+                        <button 
+                          onClick={() => handleSaveToggle(jobId)}
+                          className={`flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl border text-xs font-bold transition-all hover:-translate-y-0.5 ${
+                            isSaved 
+                              ? 'bg-green-india/10 text-green-india border-green-india/30 hover:bg-green-india/20' 
+                              : 'bg-slate-50 text-slate-600 border-slate-200 hover:text-saffron hover:border-saffron/30 hover:bg-saffron/5'
+                          }`}
+                          title={isSaved ? "Saved to bookmarks" : "Save to bookmarks"}
+                        >
+                          <Bookmark size={13} className={isSaved ? "fill-green-india text-green-india" : ""} />
+                          {isSaved ? "Saved" : "Save"}
+                        </button>
 
-                      <button 
-                        onClick={() => handleApply(jobId)}
-                        disabled={isApplied}
-                        className={`flex-1 py-2.5 rounded-xl font-extrabold transition-all text-xs hover:-translate-y-0.5 flex items-center justify-center gap-1.5 ${
-                          isApplied
-                            ? 'bg-slate-100 text-slate-400 cursor-not-allowed border border-slate-200'
-                            : 'bg-gradient-to-r from-saffron to-saffron-hover hover:shadow-lg hover:shadow-saffron/20 text-white'
-                        }`}
-                      >
-                        {isApplied ? (
-                          <>
-                            <Check size={14} className="text-green-india" /> Applied
-                          </>
-                        ) : (
-                          'Apply Now'
-                        )}
-                      </button>
-                    </div>
+                        <button 
+                          onClick={() => handleApply(jobId)}
+                          disabled={isApplied}
+                          className={`flex-1 py-2.5 rounded-xl font-extrabold transition-all text-xs hover:-translate-y-0.5 flex items-center justify-center gap-1.5 ${
+                            isApplied
+                              ? 'bg-slate-100 text-slate-400 cursor-not-allowed border border-slate-200'
+                              : 'bg-gradient-to-r from-saffron to-saffron-hover hover:shadow-lg hover:shadow-saffron/20 text-white'
+                          }`}
+                        >
+                          {isApplied ? (
+                            <>
+                              <Check size={14} className="text-green-india" /> Applied
+                            </>
+                          ) : (
+                            'Apply Now'
+                          )}
+                        </button>
+                      </div>
+                    )}
                   </div>
                 </div>
               );
@@ -677,37 +694,48 @@ const Jobs = () => {
 
               {/* Footer */}
               <div className="p-6 border-t border-slate-100 bg-slate-50 flex items-center justify-end gap-3">
-                <button 
-                  onClick={() => handleSaveToggle(jobId)}
-                  className={`flex items-center justify-center gap-1.5 px-5 py-3 rounded-xl border text-xs font-extrabold transition-all hover:-translate-y-0.5 ${
-                    isSaved 
-                      ? 'bg-green-india/10 text-green-india border-green-india/30 hover:bg-green-india/20' 
-                      : 'bg-white text-slate-700 border-slate-200 hover:text-saffron hover:border-saffron/30'
-                  }`}
-                >
-                  <Bookmark size={14} className={isSaved ? "fill-green-india text-green-india" : ""} />
-                  {isSaved ? "Saved" : "Save to Bookmarks"}
-                </button>
+                {isAdmin ? (
+                  <Link 
+                    to="/dashboard?tab=manage_jobs" 
+                    className="px-8 py-3 rounded-xl font-extrabold bg-slate-100 hover:bg-slate-200 hover:text-navy-chakra text-navy-chakra/80 border border-slate-200 transition-all text-xs block"
+                  >
+                    Manage Posting in Dashboard (Admin View)
+                  </Link>
+                ) : (
+                  <>
+                    <button 
+                      onClick={() => handleSaveToggle(jobId)}
+                      className={`flex items-center justify-center gap-1.5 px-5 py-3 rounded-xl border text-xs font-extrabold transition-all hover:-translate-y-0.5 ${
+                        isSaved 
+                          ? 'bg-green-india/10 text-green-india border-green-india/30 hover:bg-green-india/20' 
+                          : 'bg-white text-slate-700 border-slate-200 hover:text-saffron hover:border-saffron/30'
+                      }`}
+                    >
+                      <Bookmark size={14} className={isSaved ? "fill-green-india text-green-india" : ""} />
+                      {isSaved ? "Saved" : "Save to Bookmarks"}
+                    </button>
 
-                <button 
-                  onClick={() => {
-                    handleApply(jobId);
-                  }}
-                  disabled={isApplied}
-                  className={`px-8 py-3 rounded-xl font-extrabold transition-all text-xs hover:-translate-y-0.5 flex items-center justify-center gap-1.5 ${
-                    isApplied
-                      ? 'bg-slate-100 text-slate-400 cursor-not-allowed border border-slate-200'
-                      : 'bg-gradient-to-r from-saffron to-saffron-hover hover:shadow-lg hover:shadow-saffron/20 text-white'
-                  }`}
-                >
-                  {isApplied ? (
-                    <>
-                      <Check size={14} className="text-green-india" /> Applied
-                    </>
-                  ) : (
-                    'Submit Application'
-                  )}
-                </button>
+                    <button 
+                      onClick={() => {
+                        handleApply(jobId);
+                      }}
+                      disabled={isApplied}
+                      className={`px-8 py-3 rounded-xl font-extrabold transition-all text-xs hover:-translate-y-0.5 flex items-center justify-center gap-1.5 ${
+                        isApplied
+                          ? 'bg-slate-100 text-slate-400 cursor-not-allowed border border-slate-200'
+                          : 'bg-gradient-to-r from-saffron to-saffron-hover hover:shadow-lg hover:shadow-saffron/20 text-white'
+                      }`}
+                    >
+                      {isApplied ? (
+                        <>
+                          <Check size={14} className="text-green-india" /> Applied
+                        </>
+                      ) : (
+                        'Submit Application'
+                      )}
+                    </button>
+                  </>
+                )}
               </div>
             </div>
           </div>

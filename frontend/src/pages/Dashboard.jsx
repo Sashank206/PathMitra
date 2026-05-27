@@ -36,6 +36,12 @@ const Dashboard = () => {
 
   const navigate = useNavigate();
 
+  const [settingsForm, setSettingsForm] = useState({
+    name: '',
+    phone_number: '',
+    location: ''
+  });
+
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
@@ -44,6 +50,11 @@ const Dashboard = () => {
         navigate('/onboarding');
       } else {
         setUser(parsedUser);
+        setSettingsForm({
+          name: parsedUser.name || '',
+          phone_number: parsedUser.phone_number || '',
+          location: parsedUser.location || ''
+        });
         setResumeData(prev => ({
           ...prev,
           name: parsedUser.name || '',
@@ -56,6 +67,17 @@ const Dashboard = () => {
       navigate('/login');
     }
   }, [navigate]);
+
+  const getProfileCompleteness = () => {
+    if (!user) return 0;
+    let score = 0;
+    if (user.name) score += 25;
+    if (user.email) score += 25;
+    if (user.phone_number) score += 25;
+    if (user.location) score += 25;
+    return score;
+  };
+  const completeness = getProfileCompleteness();
 
   useEffect(() => {
     if (activeTab === 'overview' && user) {
@@ -235,6 +257,29 @@ const Dashboard = () => {
     }
   };
 
+  const handleSaveSettings = (e) => {
+    e.preventDefault();
+    if (!user) return;
+    const updatedUser = {
+      ...user,
+      name: settingsForm.name,
+      phone_number: settingsForm.phone_number,
+      location: settingsForm.location
+    };
+    setUser(updatedUser);
+    localStorage.setItem('user', JSON.stringify(updatedUser));
+    
+    // Update resume data so resume builder syncs as well
+    setResumeData(prev => ({
+      ...prev,
+      name: settingsForm.name,
+      phone: settingsForm.phone_number,
+      location: settingsForm.location
+    }));
+    
+    alert('Profile updated successfully!');
+  };
+
   const handlePrintResume = () => {
     window.print();
   };
@@ -291,9 +336,12 @@ const Dashboard = () => {
           {!isAdmin && (
             <>
               <div className="mt-5 bg-slate-100 rounded-full h-1.5 overflow-hidden">
-                <div className="bg-gradient-to-r from-saffron to-green-india w-3/4 h-full rounded-full"></div>
+                <div 
+                  className="bg-gradient-to-r from-saffron to-green-india h-full rounded-full transition-all duration-500"
+                  style={{ width: `${completeness}%` }}
+                ></div>
               </div>
-              <p className="text-[11px] text-slate-500 font-semibold mt-2">Profile 75% complete</p>
+              <p className="text-[11px] text-slate-500 font-semibold mt-2">Profile {completeness}% complete</p>
             </>
           )}
         </div>
@@ -954,11 +1002,16 @@ const Dashboard = () => {
               <p className="text-sm text-slate-500">Update your account details and password.</p>
             </div>
             
-            <form className="p-6 space-y-6" onSubmit={(e) => e.preventDefault()}>
+            <form className="p-6 space-y-6" onSubmit={handleSaveSettings}>
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-2">Full Name</label>
-                  <input type="text" defaultValue={user?.name} className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-saffron transition-all" />
+                  <input 
+                    type="text" 
+                    value={settingsForm.name} 
+                    onChange={(e) => setSettingsForm({...settingsForm, name: e.target.value})}
+                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-saffron transition-all" 
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-2">Email Address</label>
@@ -967,11 +1020,21 @@ const Dashboard = () => {
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-2">Phone Number</label>
-                  <input type="tel" defaultValue={user?.phone_number} className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-saffron transition-all" />
+                  <input 
+                    type="tel" 
+                    value={settingsForm.phone_number} 
+                    onChange={(e) => setSettingsForm({...settingsForm, phone_number: e.target.value})}
+                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-saffron transition-all" 
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-2">Location</label>
-                  <input type="text" defaultValue={user?.location} className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-saffron transition-all" />
+                  <input 
+                    type="text" 
+                    value={settingsForm.location} 
+                    onChange={(e) => setSettingsForm({...settingsForm, location: e.target.value})}
+                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-saffron transition-all" 
+                  />
                 </div>
               </div>
               
