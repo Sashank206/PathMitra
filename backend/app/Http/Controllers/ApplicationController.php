@@ -53,12 +53,15 @@ class ApplicationController extends Controller
         
         // Fetch job details
         $jobIds = $applications->pluck('job_id')->toArray();
-        $jobs = Job::whereIn('_id', $jobIds)->get()->keyBy('_id');
+        $jobs = Job::whereIn('_id', $jobIds)->get()->keyBy(function ($job) {
+            return (string) $job->_id;
+        });
         
         $result = $applications->map(function($app) use ($jobs) {
-            $job = $jobs[$app->job_id] ?? null;
+            $job = $jobs[(string) $app->job_id] ?? null;
             return [
                 'id' => $app->_id,
+                'job_id' => (string) $app->job_id,
                 'status' => $app->status,
                 'created_at' => $app->created_at,
                 'job' => $job

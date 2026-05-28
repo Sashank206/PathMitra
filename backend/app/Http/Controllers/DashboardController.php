@@ -48,17 +48,26 @@ class DashboardController extends Controller
             ];
         });
 
-        $recentApps = Application::orderBy('created_at', 'desc')->take(5)->get()->map(function($item) {
+        $recentAppsRaw = Application::orderBy('created_at', 'desc')->take(5)->get();
+        $userIds = $recentAppsRaw->pluck('user_id')->toArray();
+        $users = User::whereIn('_id', $userIds)->get()->keyBy(function ($u) {
+            return (string) $u->_id;
+        });
+
+        $recentApps = $recentAppsRaw->map(function($item) use ($users) {
+            $userObj = $users[(string) $item->user_id] ?? null;
+            $userName = $userObj ? $userObj->name : 'Unknown User';
+
             return [
                 'type' => 'application',
                 'role' => 'New Application',
-                'company' => 'System',
+                'company' => $userName,
                 'date' => $item->created_at ? $item->created_at->diffForHumans() : 'Recently',
                 'timestamp' => $item->created_at ? $item->created_at->timestamp : 0,
                 'status' => ucfirst($item->status ?? 'Pending'),
                 'color' => 'purple'
             ];
-        });
+        })->toArray();
 
         $recentActivity = collect([...$recentUsers, ...$recentJobs, ...$recentApps])
             ->sortByDesc('timestamp')
