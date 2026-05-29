@@ -32,7 +32,8 @@ class CustomVerifyEmail extends Notification
             [
                 'id' => $notifiable->getKey(),
                 'hash' => sha1($notifiable->getEmailForVerification()),
-            ]
+            ],
+            false
         );
 
         $query = parse_url($verifyUrl, PHP_URL_QUERY);

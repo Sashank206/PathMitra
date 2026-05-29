@@ -251,7 +251,7 @@ const GuidedNavigation = () => {
     try {
       const savedRes = await api.get('/saved-jobs');
       setSavedJobIds(new Set(savedRes.data.map(j => j._id || j.id)));
-      
+
       const appliedRes = await api.get('/applications');
       setAppliedJobIds(new Set(appliedRes.data.map(app => app.job?._id || app.job?.id || app.job_id)));
     } catch (err) {
@@ -322,7 +322,7 @@ const GuidedNavigation = () => {
       <div className="bg-gradient-to-r from-navy-chakra via-slate-950 to-navy-chakra py-16 px-4 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-saffron rounded-full blur-[120px] opacity-10 -translate-y-1/2 translate-x-1/3"></div>
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-green-india rounded-full blur-[120px] opacity-10 translate-y-1/2 -translate-x-1/3"></div>
-        
+
         <div className="max-w-3xl mx-auto text-center relative z-10">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-saffron/10 border border-saffron/20 text-saffron text-sm font-semibold mb-4">
             <Compass size={15} /> Guided Navigation System
@@ -354,13 +354,12 @@ const GuidedNavigation = () => {
             {questions.map((_, idx) => (
               <div
                 key={idx}
-                className={`h-1.5 flex-1 rounded-full transition-all duration-300 ${
-                  isComplete || idx < currentStep
+                className={`h-1.5 flex-1 rounded-full transition-all duration-300 ${isComplete || idx < currentStep
                     ? 'bg-green-india'
                     : idx === currentStep
-                    ? 'bg-saffron'
-                    : 'bg-slate-200'
-                }`}
+                      ? 'bg-saffron'
+                      : 'bg-slate-200'
+                  }`}
               />
             ))}
           </div>
@@ -397,20 +396,18 @@ const GuidedNavigation = () => {
                       <button
                         key={option.label}
                         onClick={() => handleSelect(option)}
-                        className={`w-full p-4 rounded-xl border-2 text-left transition-all duration-200 ${
-                          isSelected
+                        className={`w-full p-4 rounded-xl border-2 text-left transition-all duration-200 ${isSelected
                             ? 'border-saffron bg-saffron-light/10 shadow-md shadow-saffron/5'
                             : 'border-slate-100 hover:border-saffron/40 hover:bg-slate-50/50'
-                        }`}
+                          }`}
                       >
                         <div className="flex justify-between items-center gap-4">
                           <div>
                             <p className={`font-bold text-sm ${isSelected ? 'text-saffron-dark' : 'text-navy-chakra/90'}`}>{option.label}</p>
                             <p className={`text-xs mt-0.5 font-medium ${isSelected ? 'text-saffron' : 'text-slate-500'}`}>{option.desc}</p>
                           </div>
-                          <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center shrink-0 transition-all ${
-                            isSelected ? 'border-saffron bg-saffron' : 'border-slate-300'
-                          }`}>
+                          <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center shrink-0 transition-all ${isSelected ? 'border-saffron bg-saffron' : 'border-slate-300'
+                            }`}>
                             {isSelected && <Check size={13} className="text-white" />}
                           </div>
                         </div>
@@ -459,7 +456,7 @@ const GuidedNavigation = () => {
                   <h3 className="text-sm font-extrabold text-navy-chakra uppercase tracking-widest mb-4 flex items-center gap-2">
                     <Briefcase size={16} className="text-saffron shrink-0" /> Live Matches Tailored for You
                   </h3>
-                  
+
                   {loadingJobs ? (
                     <div className="flex justify-center py-8">
                       <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-saffron"></div>
@@ -472,7 +469,7 @@ const GuidedNavigation = () => {
                         const jobId = job.id || job._id;
                         const isSaved = savedJobIds.has(jobId);
                         const isApplied = appliedJobIds.has(jobId);
-                        
+
                         return (
                           <div key={jobId} className="bg-slate-50 hover:bg-white rounded-2xl p-4 border border-slate-200 hover:border-saffron/30 hover:shadow-md transition-all duration-300 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                             <div className="flex-1">
@@ -485,28 +482,26 @@ const GuidedNavigation = () => {
                                 <p className="text-xs text-green-india font-extrabold flex items-center gap-1"><IndianRupee size={12} /> {job.salary_range}</p>
                               )}
                             </div>
-                            
+
                             <div className="flex items-center gap-2 shrink-0 self-end sm:self-center">
-                              <button 
+                              <button
                                 onClick={() => handleSaveToggle(jobId)}
-                                className={`p-2.5 rounded-xl border text-xs font-bold transition-all ${
-                                  isSaved 
-                                    ? 'bg-green-india/10 text-green-india border-green-india/30' 
+                                className={`p-2.5 rounded-xl border text-xs font-bold transition-all ${isSaved
+                                    ? 'bg-green-india/10 text-green-india border-green-india/30'
                                     : 'bg-white text-slate-600 border-slate-200 hover:text-saffron hover:border-saffron/20'
-                                }`}
+                                  }`}
                                 title={isSaved ? "Saved" : "Save Opportunity"}
                               >
                                 <Bookmark size={13} className={isSaved ? "fill-green-india" : ""} />
                               </button>
-                              
-                              <button 
+
+                              <button
                                 onClick={() => handleApply(jobId)}
                                 disabled={isApplied}
-                                className={`px-5 py-2.5 rounded-xl font-extrabold transition-all text-xs hover:-translate-y-0.5 ${
-                                  isApplied
+                                className={`px-5 py-2.5 rounded-xl font-extrabold transition-all text-xs hover:-translate-y-0.5 ${isApplied
                                     ? 'bg-slate-200 text-slate-400 cursor-not-allowed border border-slate-300'
                                     : 'bg-gradient-to-r from-saffron to-saffron-hover text-white hover:shadow-md hover:shadow-saffron/20'
-                                }`}
+                                  }`}
                               >
                                 {isApplied ? 'Applied' : 'Apply Now'}
                               </button>
@@ -555,20 +550,18 @@ const GuidedNavigation = () => {
               <button
                 onClick={handleBack}
                 disabled={currentStep === 0}
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-colors ${
-                  currentStep === 0 ? 'text-slate-300 cursor-not-allowed' : 'text-slate-600 hover:bg-slate-200'
-                }`}
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-colors ${currentStep === 0 ? 'text-slate-300 cursor-not-allowed' : 'text-slate-600 hover:bg-slate-200'
+                  }`}
               >
                 <ChevronLeft size={18} /> Back
               </button>
               <button
                 onClick={handleNext}
                 disabled={!answers[questions[currentStep].id]}
-                className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-bold transition-all ${
-                  !answers[questions[currentStep].id]
+                className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-bold transition-all ${!answers[questions[currentStep].id]
                     ? 'bg-slate-100 text-slate-400 cursor-not-allowed'
                     : 'bg-gradient-to-r from-saffron to-saffron-hover text-white hover:shadow-lg hover:shadow-saffron/20 hover:-translate-y-0.5'
-                }`}
+                  }`}
               >
                 {currentStep === questions.length - 1 ? 'Show My Results' : 'Next'} <ArrowRight size={18} />
               </button>
